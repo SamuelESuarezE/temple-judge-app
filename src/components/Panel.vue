@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 import { ws } from '../ws';
 
 const handleClick = (color, scored) => {
@@ -9,7 +8,7 @@ const handleClick = (color, scored) => {
     scored: scored,
     timestamp: Date.now().toString()
   }
-  ws.send(point)
+  ws.send(JSON.stringify(point))
 };
 
 
