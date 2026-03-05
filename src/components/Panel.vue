@@ -1,17 +1,24 @@
 <script setup>
 import { ref } from 'vue';
-defineProps(['variante'])
+import { ws } from '../ws';
 
-const contador = ref(0)
-
-function subircontador(numero) {
-  contador.value += numero
-}
-
-const handleClick = () => {
-  console.log("Clicked");
+const handleClick = (color, scored) => {
+  const point = {
+    judgeId: "EXAMPLE",
+    color: color,
+    scored: scored,
+    timestamp: Date.now().toString()
+  }
+  ws.send(point)
 };
 
+
+const AKA = "AKA"
+const AO = "AO"
+
+const YUKO = "Yuko (1)"
+const WAZARI = "Wazari (2)"
+const IPPON = "Ippon (3)"
 
 const paths = {
   p3: "M8,0 L92,0 Q100,0 100,8 L100,67 Q100,75 92,77 L8,98 Q0,100 0,92 L0,8 Q0,0 8,0 Z",
@@ -28,22 +35,22 @@ const paths = {
   <div class="contenedor">
 
     <!-- IZQUIERDA -->
-    <div class="columna">
-      <div class="btn-wrapper" @click="subircontador(3)">
+    <div class="columna">"
+      <div class="btn-wrapper" @click="handleClick(AKA, IPPON)">
         <svg viewBox="0 0 100 100" preserveAspectRatio="none">
           <path :d="paths.p3" class="red" />
         </svg>
         <span class="numero">3</span>
       </div>
 
-      <div class="btn-wrapper" @click="subircontador(2)">
+      <div class="btn-wrapper" @click="handleClick(AKA, WAZARI)">
         <svg viewBox="0 0 100 100" preserveAspectRatio="none">
           <path :d="paths.p2" class="red" />
         </svg>
         <span class="numero">2</span>
       </div>
 
-      <div class="btn-wrapper" @click="subircontador(1)">
+      <div class="btn-wrapper" @click="handleClick(AKA, YUKO)">
         <svg viewBox="0 0 100 100" preserveAspectRatio="none">
           <path :d="paths.p1" class="red" />
         </svg>
@@ -53,21 +60,21 @@ const paths = {
 
     <!-- DERECHA -->
     <div class="columna">
-      <div class="btn-wrapper" @click="subircontador(3)">
+      <div class="btn-wrapper" @click="handleClick(AO, IPPON)">
         <svg viewBox="0 0 100 100" preserveAspectRatio="none">
           <path :d="paths.p3r" class="blue" />
         </svg>
         <span class="numero">3</span>
       </div>
 
-      <div class="btn-wrapper" @click="subircontador(2)">
+      <div class="btn-wrapper" @click="handleClick(AO, WAZARI)">
         <svg viewBox="0 0 100 100" preserveAspectRatio="none">
           <path :d="paths.p2r" class="blue" />
         </svg>
         <span class="numero">2</span>
       </div>
 
-      <div class="btn-wrapper" @click="subircontador(1)">
+      <div class="btn-wrapper" @click="handleClick(AO, YUKO)">
         <svg viewBox="0 0 100 100" preserveAspectRatio="none">
           <path :d="paths.p1r" class="blue" />
         </svg>
