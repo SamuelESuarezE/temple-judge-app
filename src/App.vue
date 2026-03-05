@@ -6,7 +6,6 @@ import Panel from './components/Panel.vue';
 <template>
 
   <Panel variante="red" />
-  <Panel variante="blue" />
    
 </template>
 
